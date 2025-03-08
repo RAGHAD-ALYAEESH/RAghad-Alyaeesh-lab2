@@ -1,0 +1,112 @@
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 80vh;
+    font-family: "Times New Roman", serif;
+}
+
+div {
+    text-align: center;
+}
+
+.table1 {
+    border-collapse: separate;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px 10px;
+    border: 1px solid black;
+    
+}
+
+.bold {
+    font-weight: bold;
+}
+
+
+img {
+    width: 200px;
+    height: auto;
+}
+
+
+.header {
+    background-color: #f7f7d4;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+}
+.container {
+    margin: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.header-task3 {
+    background-color: #5f9ea0;
+    padding: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+
+
+
+
+
+
+mark {
+    background-color: yellow;
+}
+
+.link-container {
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.link:visited {
+    color: orange ;
+}
+.link:hover {
+    color: pink ;
+    text-decoration: underline;
+}
+.link:active {
+    color: blue ;
+}
+
+#green {
+    background-color: lightgreen;
+}
+#gray {
+    background-color: gray;
+}
+#black {
+    background-color: black;
+}
+
+#red-link {
+    color: red;
+    text-decoration: underline;
+}
+#yellow-link {
+    color: yellow;
+    text-decoration: underline;
+}
+#white-link {
+    color: white;
+    text-decoration: underline;
+}
+
+

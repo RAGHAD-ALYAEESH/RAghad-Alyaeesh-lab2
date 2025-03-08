@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  
+  <link rel="icon" href="{% static 'qu-icon.png' %}">
+  <link rel="stylesheet" href="{% static 'main.css' %}"> <!-- include css file -->
+ 
+</head>
+<body>
+    
+    <div class="link-container" id="green">
+        <a href="https://www.qu.edu.sa" class="link" id="red-link" target="_blank">Go to QU website (open a new tab)</a>
+    </div>
+
+    <div class="link-container" id="gray">
+        <a href="https://www.qu.edu.sa" class="link" id="yellow-link" target="_self">Go to QU website (open in the same page/tab)</a>
+    </div>
+
+    <div class="link-container" id="black">
+        <a href="https://www.qu.edu.sa" class="link" id="white-link" target="_self">Go to QU website (open in the same page/tab)</a>
+    </div>
+</body>
+</html>

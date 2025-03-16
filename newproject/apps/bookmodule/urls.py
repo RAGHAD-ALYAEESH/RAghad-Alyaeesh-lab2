@@ -14,4 +14,6 @@ urlpatterns = [
     path('html5/text/formatting',views.text_formatting, name= "text_formatting_books"),
     path('html5/listing',views.listing, name= "listing_books"),
     path('html5/tables',views.tables, name= "tables_books"),
+    path('search',views.search, name= "search_books"),
+     path('booklist',views.search, name= "booklist_books"),
 ]

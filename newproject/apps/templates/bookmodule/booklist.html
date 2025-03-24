@@ -22,19 +22,27 @@
 {% block content %}
 <h2>Search Results</h2>
     {% if books %}
-        <table>
+        <!--<table>
             <tr>
                 <th>Title</th>
                 <th>Author</th>
             </tr>
+           
             {% for book in books %}
                 <tr>
                     <td>{{ book.title }}</td>
                     <td>{{ book.author }}</td>
                 </tr>
             {% endfor %}
-        </table>
+        </table> -->
+
+        {% for obj in books %}
+            ID: {{obj.id}}, Title: {{obj.title}}
+            <hr>
+        {% endfor %}
     {% else %}
         <p>No books found.</p>
     {% endif %}
 {% endblock content %}
+
+

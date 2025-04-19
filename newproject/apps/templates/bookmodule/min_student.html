@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} oldest Student per Department  {% endblock title %}
+{% block stylesheets %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+{% endblock stylesheets %}
+ {% block content %}
+<h2>Oldest Student per Department (by ID)</h2>
+
+<table>
+    <tr>
+        <th>Department</th>
+        <th>Oldest Student ID</th>
+    </tr>
+    {% for dept in departments %}
+        <tr>
+            <td>{{ dept.name }}</td>
+            <td>{{ dept.oldest_student_id }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Students per Department  {% endblock title %}
+{% block stylesheets %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+{% endblock stylesheets %}
+ 
+{% block content %}
+<h2>Number of Students per Department</h2>
+   
+<table border="1">
+    <tr>
+        <th>Department</th>
+        <th>Number of Students</th>
+    </tr>
+   
+    {% for dept in name_of_Dep %}
+        <tr>
+            <td>{{ dept.name }}</td>
+            <td>{{ dept.student_count }}</td>
+        </tr>
+    {% endfor %}
+</table> 
+{% endblock content %}

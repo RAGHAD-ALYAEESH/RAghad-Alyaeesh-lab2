@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Book,Address,Student
-from django.db.models import Q,Count,Sum,Avg,Max,Min
+from .models import Book,Address,Student,Department,Course,Student3
+from django.db.models import Q,Count,Sum,Avg,Max,Min,Subquery, OuterRef
 
 def index(request): 
     name = request.GET.get("name") or "world!"
@@ -89,9 +89,6 @@ def complex_query(request):
     else:
         return render(request, 'bookmodule/index.html')
 
-
-
-
 def lab8_task1(request):
     mybooks=Book.objects.filter(Q (price__lte=80)) # <- multiple objects
     return render(request, 'bookmodule/bookList.html', {'books':mybooks})
@@ -118,14 +115,32 @@ def lab8_task5(request):
     )
     return render(request, 'bookmodule/static.html', {'stats':stats})
 
-
 def lab8_task7(request):
     city_stats = Address.objects.annotate(student_count=Count('student')) 
     return render(request, 'bookmodule/student.html', {'city_stats': city_stats})
 
 
+def lab9_task1(request):
+    name_of_Dep = Department.objects.annotate(student_count=Count('student3')) .order_by('-student_count')
+    return render(request, 'bookmodule/department.html', {'name_of_Dep': name_of_Dep})
 
 
+def lab9_task2(request):
+    name_of_Course = Course.objects.annotate(student_count=Count('student3')) .order_by('-student_count')
+    return render(request, 'bookmodule/course.html', {'name_of_Course': name_of_Course})
+
+def lab9_task3(request):
+     departments = Department.objects.annotate(
+       oldest_student_id=Min('student3__id')
+      )
+     return render(request, 'bookmodule/min_student.html', {'departments': departments})
+
+def lab9_task4(request):
+    departments = Department.objects.annotate(student_count=Count('student3')) \
+        .filter(student_count__gt=2) \
+        .order_by('-student_count')
+
+    return render(request, 'bookmodule/student_GT_2.html', {'departments_with_more_than_two': departments})
 
 
 

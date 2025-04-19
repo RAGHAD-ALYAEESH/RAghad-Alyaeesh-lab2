@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Dep whit GT 2 Stu {% endblock title %}
+{% block stylesheets %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+{% endblock stylesheets %}
+{% block content %}
+<h2>Departments with More Than 2 Students</h2>
+
+<table>
+    <tr>
+        <th>Department</th>
+        <th>Number of Students</th>
+    </tr>
+    {% for dept in departments_with_more_than_two %}
+        <tr>
+            <td>{{ dept.name }}</td>
+            <td>{{ dept.student_count }}</td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="2">No departments found with more than 2 students.</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

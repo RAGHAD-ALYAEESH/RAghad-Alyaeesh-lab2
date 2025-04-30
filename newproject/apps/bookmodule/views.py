@@ -1,8 +1,8 @@
 from django.shortcuts import render , get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Book,Address,Student,Department,Course,Student3
+from .models import Book, Address, Student, Department, Course, Student3, Student4, Profile
 from django.db.models import Q,Count,Sum,Avg,Max,Min,Subquery, OuterRef
-from .forms import BookForm
+from .forms import BookForm, StudentForm, Student2Form, ProfileForm
 
 def index(request): 
     name = request.GET.get("name") or "world!"
@@ -120,11 +120,9 @@ def lab8_task7(request):
     city_stats = Address.objects.annotate(student_count=Count('student')) 
     return render(request, 'bookmodule/student.html', {'city_stats': city_stats})
 
-
 def lab9_task1(request):
     name_of_Dep = Department.objects.annotate(student_count=Count('student3')) .order_by('-student_count')
     return render(request, 'bookmodule/department.html', {'name_of_Dep': name_of_Dep})
-
 
 def lab9_task2(request):
     name_of_Course = Course.objects.annotate(student_count=Count('student3')) .order_by('-student_count')
@@ -142,7 +140,6 @@ def lab9_task4(request):
         .order_by('-student_count')
 
     return render(request, 'bookmodule/student_GT_2.html', {'departments_with_more_than_two': departments})
-
 
 def lab10_part1_task1(request):
     mybooks=Book.objects.order_by('title')
@@ -221,22 +218,98 @@ def lab10_part2_task4(request, book_id):
     
     return render(request, 'bookmodule/part2_deleteBook.html', {'book': book})
 
+def lab11_task1_list(request):
+    mystudents=Student.objects.order_by('name')
+    return render(request, 'usermodule/task1_listStudents.html', {'students':mystudents})
+
+def lab11_task1_add(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lab11_task1_list')
+        
+    else:
+        form = StudentForm()
+    return render(request,'usermodule/task1_addStudent.html', {'form': form})
+
+def lab11_task1_update(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('lab11_task1_list')
+    else:
+        form = StudentForm(instance=student)
+    
+    return render(request, 'usermodule/task1_editStudent.html', {'form': form, 'student': student})
+
+def lab11_task1_delete(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+
+    if request.method == 'POST':
+        student.delete()
+        return redirect('lab11_task1_list')
+    
+    return render(request, 'usermodule/task1_deleteStudent.html', {'student': student})
+
+def lab11_task2_list(request):
+    students = Student4.objects.order_by('name')
+    return render(request, 'usermodule/task2_listStudents.html', {'students': students})
+
+def lab11_task2_add(request):
+    if request.method == 'POST':
+        form = Student2Form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lab11_task2_list')
+    else:
+        form = Student2Form()
+    return render(request, 'usermodule/task2_addStudent.html', {'form': form})
+
+def lab11_task2_update(request, student_id):
+    student = get_object_or_404(Student4, pk=student_id)
+    if request.method == 'POST':
+        form = Student2Form(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('lab11_task2_list')
+    else:
+        form = Student2Form(instance=student)
+    return render(request, 'usermodule/task2_editStudent.html', {'form': form, 'student': student})
+
+def lab11_task2_delete(request, student_id):
+    student = get_object_or_404(Student4, pk=student_id)
+    if request.method == 'POST':
+        student.delete()
+        return redirect('lab11_task2_list')
+    return render(request, 'usermodule/task2_deleteStudent.html', {'student': student})
 
 
 
 
+def profile_list(request):
+    profiles = Profile.objects.all()
+    return render(request, 'usermodule/profile_list.html', {'profiles': profiles})
 
+def profile_add(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_list')
+    else:
+        form = ProfileForm()
+    return render(request, 'usermodule/profile_add.html', {'form': form})
 
+def delete_profile(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
 
-
-
-
-
-
-
-
-
-
+    if request.method == 'POST':
+        profile.delete()
+        return redirect('profile_list')
 
 #def index(request):
     #name = request.GET.get("name") or "world!"

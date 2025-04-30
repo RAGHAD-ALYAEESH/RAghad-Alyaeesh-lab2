@@ -1,0 +1,46 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Add New Student {% endblock title %}
+
+{% block stylesheets %}
+<style>
+    .form-container {
+        margin-top: 20px;
+        max-width: 500px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+
+    input[type="text"], input[type="number"], select {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+    button {
+        color: #fff;
+        background-color: #17a2b8;
+        padding: 12px 24px;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: green;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Add a New Student</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn" type="submit">➕ Add Student</button>
+    </form>
+</div>
+{% endblock content %}

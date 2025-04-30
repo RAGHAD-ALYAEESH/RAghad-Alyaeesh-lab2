@@ -1,0 +1,57 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Student List (with Django Forms) {% endblock title %}
+
+{% block stylesheets %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .actions a {
+        margin-right: 10px;
+    }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<h2>Student List</h2>
+
+<a href="{% url 'lab11_task1_add' %}">➕ Add New Student</a>
+
+{% if students %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.address.city }}</td>
+                <td>{{ student.age }}</td>
+                <td class="actions">
+                    <a href="{% url 'lab11_task1_update' student.id %}">Edit ✏️</a>
+                    <a href="{% url 'lab11_task1_delete' student.id %}">Delete 🗑️</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No students found.</p>
+{% endif %}
+{% endblock content %}

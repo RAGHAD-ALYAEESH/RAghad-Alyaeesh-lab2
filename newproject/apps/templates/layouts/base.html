@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 {% load static %}
 <head>
-  <title>{% block title %} {% endblock title %}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}My Site{% endblock title %}</title>
+  
+  <!-- SEO Meta -->
   <meta name="keywords" content="Books, recent, Learning, library">
   <meta name="description" content="Books website">
   <meta name="author" content="author name">
+
+  <!-- Favicon -->
   <link rel="icon" href="{% static 'qu-icon.png' %}">
-  <meta charset="UTF-8">
- 
-  <link rel="stylesheet" href="{% static 'styles.css' %}"> <!-- include css file -->
- 
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+
   {% block stylesheets %}{% endblock stylesheets %}
 </head>
 <body>
-    
-    {% include "includes/header.html" %}
- 
-    {% block content %} {% endblock content %}
- 
-    {% include "includes/footer.html" %}
+  
+  {% include "includes/header.html" %}
 
+  <main>
+    {% block content %}{% endblock content %}
+  </main>
+
+  {% include "includes/footer.html" %}
+
+  <!-- Bootstrap JS (optional for dropdowns, modals, etc.) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

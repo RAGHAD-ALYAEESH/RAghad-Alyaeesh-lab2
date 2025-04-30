@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from .models import Book, Address, Student, Department, Course, Student3, Student4, Profile
 from django.db.models import Q,Count,Sum,Avg,Max,Min,Subquery, OuterRef
 from .forms import BookForm, StudentForm, Student2Form, ProfileForm
+from django.contrib.auth.decorators import login_required
+
+
+
 
 def index(request): 
     name = request.GET.get("name") or "world!"
@@ -218,6 +222,7 @@ def lab10_part2_task4(request, book_id):
     
     return render(request, 'bookmodule/part2_deleteBook.html', {'book': book})
 
+@login_required(login_url='/users/login')
 def lab11_task1_list(request):
     mystudents=Student.objects.order_by('name')
     return render(request, 'usermodule/task1_listStudents.html', {'students':mystudents})
@@ -255,6 +260,7 @@ def lab11_task1_delete(request, student_id):
     
     return render(request, 'usermodule/task1_deleteStudent.html', {'student': student})
 
+@login_required(login_url='/users/login')
 def lab11_task2_list(request):
     students = Student4.objects.order_by('name')
     return render(request, 'usermodule/task2_listStudents.html', {'students': students})
@@ -289,7 +295,7 @@ def lab11_task2_delete(request, student_id):
 
 
 
-
+@login_required(login_url='/users/login')
 def profile_list(request):
     profiles = Profile.objects.all()
     return render(request, 'usermodule/profile_list.html', {'profiles': profiles})
